@@ -1,7 +1,7 @@
 package launch;
 
+import interpreter.Formatter;
 import interpreter.LineOfCode;
-import types.StatementType;
 import types.Variable;
 
 import java.io.IOException;
@@ -14,6 +14,7 @@ public class UMLByClass {
     static ArrayList<Variable> knownVariables = new ArrayList<>();
 
     static void main() {
+        ArrayList<LineOfCode> lines = new ArrayList<>();
         ArrayList<String> umlOutput = new ArrayList<>();
         ArrayList<String> fileContent;
         int bracketLayer = 0;
@@ -32,14 +33,20 @@ public class UMLByClass {
 
             LineOfCode lineOfCode = new LineOfCode(line, bracketLayer);
             if (!lineOfCode.getUmlOutput().trim().isEmpty()) {
-                umlOutput.add(lineOfCode.getUmlOutput());
+                lines.add(lineOfCode);
             }
         }
 
-        IO.println("### UML-Diagram ###");
+        Formatter fmt = new Formatter(lines);
+        for (LineOfCode line : lines) {
+            umlOutput.add(fmt.formatStatement(line));
+        }
+
         for (String line : umlOutput) {
             IO.println(line);
         }
+
+        fmt.finishUMLOutput();
     }
 
     private static List<String> fetchFileContent() throws IOException {
