@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UMLByClass {
-    static ArrayList<Variable> knownVariables = new ArrayList<>();
+    private static final ArrayList<Variable> knownVariables = new ArrayList<>();
 
     static void main() {
         ArrayList<LineOfCode> lines = new ArrayList<>();

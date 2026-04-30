@@ -56,12 +56,12 @@ public class Typer {
         if (line.getLineInText().contains(")") && line.getLineInText().contains("(") && line.getLineInText().contains("{")) {
             int firstBracket = line.getLineInText().indexOf("(");
             String beforeParameters = line.getLineInText().substring(0, firstBracket);
-            String[] beforeParametersSplitted = beforeParameters.split(" ");
+            String[] beforeParametersSplit = beforeParameters.split(" ");
 
             if (AccessModifier.getAccessModifier(line.getLineInText()) == AccessModifier.DEFAULT) {
-                return beforeParametersSplitted.length == 2;
+                return beforeParametersSplit.length == 2;
             } else {
-                return beforeParametersSplitted.length > 2;
+                return beforeParametersSplit.length > 2;
             }
         }
         return false;
